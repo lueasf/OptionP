@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Calculateur Black-Scholes</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container index-container">
+    <h1>Paramètres de l'option</h1>
+    <form method="post">
+        <label>
+            <input type="checkbox" name="use_yfinance" id="use_yfinance"> 
+            Utiliser les données Yahoo Finance
+        </label>
+        
+        <div id="ticker_section" style="display:none;">
+            <label for="ticker">Sélectionnez un ticker :</label>
+            <select name="ticker" id="ticker">
+                {% for ticker in tickers %}
+                    <option value="{{ ticker }}">{{ ticker }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        
+        <div id="manual_inputs">
+            <label>Prix actuel (S0):</label>
+            <input type="number" step="0.01" name="S0" value="100"><br>
+            
+            <label>Strike (K):</label>
+            <input type="number" step="0.01" name="K" value="100"><br>
+            
+            <label>Maturité (T en années):</label>
+            <input type="number" step="0.01" name="T" value="1"><br>
+            
+            <label>Taux sans risque (r):</label>
+            <input type="number" step="0.01" name="r" value="0.05"><br>
+            
+            <label>Volatilité (σ):</label>
+            <input type="number" step="0.01" name="sigma" value="0.2"><br>
+        </div>
+        
+        <label>Type d'option:</label>
+        <select name="option_type">
+            <option value="call">Call</option>
+            <option value="put">Put</option>
+        </select><br>
+        
+        <button type="submit">Calculer</button>
+    </form>
+    </div>
+    
+    <script>
+        document.getElementById('use_yfinance').addEventListener('change', function() {
+            document.getElementById('ticker_section').style.display = this.checked ? 'block' : 'none';
+            document.getElementById('manual_inputs').style.display = this.checked ? 'none' : 'block';
+        });
+    </script>
+
+</body>
+</html>

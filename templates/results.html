@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Résultats</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container results-container">
+    <h1>Résultats du calcul</h1>
+    
+    {% if ticker %}
+    <h3>Données récupérées pour {{ ticker }}</h3>
+    {% endif %}
+    
+    <h2>Prix théoriques</h2>
+    <p>Black-Scholes: {{ bs_price }}</p>
+    <p>Monte Carlo: {{ mc_price }}</p>
+    
+    <h2>Sensibilités (Grecques)</h2>
+    <ul>
+        <li>Delta {{ 'Call' if option_type == 'call' else 'Put' }}: {{ greeks.delta_call if option_type == 'call' else greeks.delta_put }}</li>
+        <li>Gamma: {{ greeks.gamma }}</li>
+        <li>Vega: {{ greeks.vega }}</li>
+        <li>Theta {{ 'Call' if option_type == 'call' else 'Put' }}: {{ greeks.theta_call if option_type == 'call' else greeks.theta_put }}/jour</li>
+        <li>Rho {{ 'Call' if option_type == 'call' else 'Put' }}: {{ greeks.rho_call if option_type == 'call' else greeks.rho_put }}%/point</li>
+    </ul>
+    
+    <h2>Convergence Monte Carlo</h2>
+    <img src="{{ url_for('static', filename='plots/mc_convergence.png') }}" width="600">
+    
+    <a href="/download_pdf"><button>Télécharger le rapport PDF</button></a>
+    <a href="/"><button>Nouveau calcul</button></a>
+    </div>
+</body>
+</html>
