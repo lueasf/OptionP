@@ -6,6 +6,8 @@ Pour cela, je vais utiliser Flask, NumPy et SciPy.
 Pour rappel, le modèle de Black-Scholes permet de calculer le prix théorique d'une option européenne (call ou put) en fonction de plusieurs paramètres.
 Les options européennes, contrairement aux options américaines, ne peuvent être exercées qu'à la date d'expiration.
 
+![Screenshot](app.png)
+
 ## Installation
 
 1. Cloner le dépôt :
