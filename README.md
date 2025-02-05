@@ -12,8 +12,11 @@ Les options européennes, contrairement aux options américaines, ne peuvent êt
 ```bash
 git clone https://github.com/votreusername/OptionP.git
 cd OptionP
+python3 -m venv venv
+source venv/bin/activate
+pip install --upgrade pip
 pip install -r requirements.txt
-python3 app.py (ou flask run)
+flask run
 ```
 
 ## Modèle de Black-Scholes
